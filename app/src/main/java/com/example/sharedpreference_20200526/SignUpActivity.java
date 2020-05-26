@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -25,6 +26,43 @@ public class SignUpActivity extends BaseActivity {
 
     @Override
     public void setupEvents() {
+
+        binding.pwCheckEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String inputPw = s.toString();
+
+                if (inputPw.equals("")) {
+                    binding.pwCheckResultTxt.setText("비밀번호를 입력해주세요.");
+                    binding.pwCheckResultTxt.setTextColor(Color.parseColor("#A0A0A0"));
+                }
+                else if (inputPw.length() < 8) {
+                    binding.pwCheckResultTxt.setText("비밀번호가 너무 짧습니다.");
+                    binding.pwCheckResultTxt.setTextColor(Color.RED);
+                }
+                else {
+                    String originalPw = binding.pwEdt.getText().toString();
+                    if (!originalPw.equals(inputPw)) {
+                        binding.pwCheckResultTxt.setText("비밀번호가 서로 다릅니다.");
+                        binding.pwCheckResultTxt.setTextColor(Color.RED);
+                    }
+                    else {
+                        binding.pwCheckResultTxt.setText("사용해도 좋은 비밀번호입니다.");
+                        binding.pwCheckResultTxt.setTextColor(Color.parseColor("#2767E3"));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         binding.emailEdt.addTextChangedListener(new TextWatcher() {
             @Override

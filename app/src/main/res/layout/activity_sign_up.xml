@@ -49,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="사용해도 좋은 이메일 입니다."
+                    android:textColor="#A0A0A0"
                     android:textSize="13sp"/>
 
             </LinearLayout>

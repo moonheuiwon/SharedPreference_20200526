@@ -11,6 +11,7 @@ public class ContextUtil {
 
 //    항목의 이름에 오타를 내지 않기 위해서 변수로 만들고 => 자동완성으로 활용
     private static final String USER_ID = "USER_ID";
+    private static final String ID_SAVE = "ID_SAVE";
 
 //    아이디를 받아서 저장해주는 메쏘드드
     public static void setUserId(Context context, String inputId) {
@@ -23,6 +24,14 @@ public class ContextUtil {
     public static String getUserId(Context context) {
         SharedPreferences pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
         return pref.getString(USER_ID, "");
+    }
+    public static void setIdSave(Context context, boolean needSave) {
+        SharedPreferences pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+        pref.edit().putBoolean(ID_SAVE,needSave).apply();
+    }
+    public static boolean isIdSave(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+        return pref.getBoolean(ID_SAVE, false);
     }
 
 }
